@@ -24,11 +24,12 @@
 			email VARCHAR(100) NOT NULL UNIQUE,
 			password VARCHAR(200) NOT NULL,
 			verified BOOLEAN NOT NULL,
-			notifications BOOLEAN NOT NULL
+			notifications BOOLEAN NOT NULL,
+			verifyhash varchar(100) NOT NULL
 			)";
 		$connect->exec($sql);
 		// echo "It really did stuff";
-		header("Location: ../make_functional/register.php");
+		header("Location: ../make_functional/index.php");
 	}
 	catch(PDOException $e){
 		echo $e->getMessage();

@@ -8,9 +8,35 @@
 	// make sure username != email format
 	} else {
 	try{
-		$sql="INSERT INTO users (firstname, lastname, username, email, password, verified, notifications) 
-		VALUES('{$_POST[firstname]}', '{$_POST[lastname]}', '{$_POST[username]}', '{$_POST[email]}', '{$_POST[password1]}', 0, 0)";
-		$connect->exec($sql);
+		$verifyhash=md5(rand(0,1000));
+		$hash= password_hash($_POST['password1'], PASSWORD_DEFAULT);
+		$sql="INSERT INTO users (firstname, lastname, username, email, `password`, verified, notifications, verifyhash) 
+		VALUES(:firstname, :lastname, :username, :email, :password, 0, 0, '$verifyhash')";
+		$stmt=$connect->prepare($sql);
+		$stmt->bindParam(':lastname', $_POST['lastname']);
+		$stmt->bindParam(':username', $_POST['username']);
+		$stmt->bindParam(':password', $hash);
+		$stmt->bindParam(':firstname', $_POST['firstname']);
+		$stmt->bindParam(':email', $_POST['email']);
+		$stmt->execute();
+		$to      = $_POST['email'];
+		$_SESSION['email'] = $to;
+		$_SESSION['hash'] = $verifyhash;
+		$subject = 'Signup | Verification';
+		$message = '
+		Thanks for signing up!
+		Your account has been created, you can login with your credentials after you have activated your account by pressing the url below.
+ 
+		------------------------
+		Username: '.$name.'
+		------------------------
+ 
+		Please click this link to activate your account:
+		http://localhost:8081/camagru/make_functional/verify.php?email='.$_POST['email'].'&hash='.$verifyhash;
+
+		$headers = 'From:noreply@camagru.com' . "\r\n"; // Set from headers
+		mail($to, $subject, $message, $headers);
+		header("Location: index.php");
 	}
 	catch(PDOException $e){
 		if($e->getCode() === 23000)
@@ -19,7 +45,9 @@
 			echo $e->getMessage();
 	}
 }
+	$_SESSION['username'] = $_POST['username'];
 	$connect = NULL;
+	
 } 
 ?>
 <!DOCTYPE html>
@@ -44,7 +72,7 @@
 		<br>
 		<input type="password" name="password2" placeholder="Confirm Password" required>
 		<br>
-		<button type="submit" name="login_btn" value="yes">login</button>
+		<button type="submit" name="register_btn" value="yes">Register</button>
 	</form>
 </body>
 </html>

@@ -42,10 +42,10 @@
         </a>
 
         <div class="navbar-dropdown">
-          <a class="navbar-item" href="profile.php">
+          <a class="navbar-item">
             Profile
           </a>
-          <a class="navbar-item" href="conatct.php">
+          <a class="navbar-item">
             Contact
           </a>
           <hr class="navbar-divider">
@@ -57,14 +57,26 @@
     </div>
 
     <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary" href="register.php">
+            <strong>Sign up</strong>
+          </a>
+          <a class="button is-light" href="login.php">
+            Log in
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
-<img class="bckgrd" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcThdy_XX2J2s9JGPf1nlUpOmn30sYhWBQUAOw5NvQLZksH9RAiw">
-  <div class="floating">
-    <p>Welcome to Camagru <?php echo ($_SESSION["username"])?>!</p>
+<div class="container1">
+  <div>
+    <img class="bckgrd" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcThdy_XX2J2s9JGPf1nlUpOmn30sYhWBQUAOw5NvQLZksH9RAiw">
   </div>
-  <button id="take_pic" onclick="window.location.href = 'camera.php';">Take A Picture!</button>
+  <div class="floating">
+    <p>Welcome to Camagru! <br> Check out all our cool features down below</p>
+  </div>
 </div>
 	<script>
 		document.addEventListener('DOMContentLoaded', () => {
