@@ -14,7 +14,13 @@
 <body>
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="index.php">
+    <a class="navbar-item" href="
+        <?php
+          if($_SESSION['username'])
+          echo 'home.php">';
+          else
+          echo 'index.php">';
+        ?>
       <h1>Camagru</h1>
     </a>
 
@@ -27,7 +33,13 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" href="index.php">
+      <a class="navbar-item" href="
+        <?php
+          if($_SESSION['username'])
+          echo 'home.php">';
+          else
+          echo 'index.php">';
+        ?>
         Home
       </a>
       <a class="navbar-item" href="about.php">

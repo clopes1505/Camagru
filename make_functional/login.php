@@ -1,6 +1,3 @@
-<?php
-	$_SESSION['username'];
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,9 +20,9 @@
 			$res = $req->fetch();
 			if (password_verify($_POST['password'],$res['password'] ))
 			{
+        $_SESSION['username'] = $_POST['username'];
 				if ($res["verified"] == 1)
 				{
-					$_SESSION['username'] = $_POST['username'];
 					header("location: home.php");
 				}
 			} else

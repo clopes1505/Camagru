@@ -1,5 +1,5 @@
 <?php
-	require('../config/connect.php');
+  require('../config/connect.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +14,13 @@
 <body>
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="index.php">
+    <a class="navbar-item" href="
+        <?php
+          if($_SESSION['username'])
+          echo 'home.php">';
+          else
+          echo 'index.php">';
+        ?>
       <h1>Camagru</h1>
     </a>
 
@@ -27,7 +33,13 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" href="index.php">
+      <a class="navbar-item" href="
+        <?php
+          if($_SESSION['username'])
+          echo 'home.php">';
+          else
+          echo 'index.php">';
+        ?>
         Home
       </a>
       <a class="navbar-item" href="about.php">
@@ -61,6 +73,9 @@
   </div>
 </nav>
 <div class = "video">
-	<video id = video>Stream not available...</video>
+  <video id ="video">Stream not available...</video>
+  <canvas class="my_canvas" id ="my_canvas"></canvas>
 </div>
+<button id="capture" >Capture!</button>
+
 <script src = "../js_stuff/vid.js"></script>

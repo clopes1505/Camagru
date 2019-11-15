@@ -32,11 +32,11 @@
 		------------------------
  
 		Please click this link to activate your account:
-		http://localhost:8081/camagru/make_functional/verify.php?email='.$_POST['email'].'&hash='.$verifyhash;
+		http://localhost:8080/camagru/make_functional/verify.php?email='.$_POST['email'].'&hash='.$verifyhash;
 
 		$headers = 'From:noreply@camagru.com' . "\r\n"; // Set from headers
 		mail($to, $subject, $message, $headers);
-		header("Location: index.php");
+		header("Location: login.php");
 	}
 	catch(PDOException $e){
 		if($e->getCode() === 23000)
@@ -45,7 +45,6 @@
 			echo $e->getMessage();
 	}
 }
-	$_SESSION['username'] = $_POST['username'];
 	$connect = NULL;
 	
 } 
