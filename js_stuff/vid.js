@@ -1,27 +1,25 @@
-var video = document.getElementById('video'),
-canvas = document.getElementById('my_canvas'),
-context = canvas.getContext('2d'),
-vendorURL = window.URL || window.webkitURL;
-var image;
-navigator.getMedia =    navigator.getUserMedia || 
-                        navigator.webkitGetUserMedia || 
-                        navigator.mozGetUserMedia || 
-                        navigator.msGetUserMedia;
-navigator.getMedia({
-    video: true,
-    audio: false
-}, function(stream){
-    video.srcObject = stream;
-    video.play();
-}, function(error) 
-{
-​
-});
-​
+var video = document.getElementById('video');
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+var vendorURL = window.URL || window.webkitURL;
+var uploadpic = document.getElementById('upload');
+navigator.mediaDevices.getUserMedia({video: true}).then((stream) => {video.srcObject = stream; video.play()});
+
 document.getElementById('capture').addEventListener('click', function()
 {
-context.drawImage(video, 0, 0, 400, 300);
-if (image.src)
-context.drawImage(image, 20, 10, 100, 70);
-photo.setAttribute('src', canvas.toDataURL('image/png'));  
+    context.drawImage(video, 0, 0, 500, 400);
+    //photo.setAttribute('src', canvas.toDataURL('image/png'));  
+});
+
+uploadpic.addEventListener('change', (event) => {
+    if (uploadpic.files.length > 0)
+    {
+        var img = new Image();
+        img.addEventListener('load', () => {
+            canvas.height = img.height;
+            canvas.width = img.width;
+            context.drawImage(img, 0, 0);
+        });
+        img.src = URL.createObjectURL(uploadpic.files[0])
+    }
 });

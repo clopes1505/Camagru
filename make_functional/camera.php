@@ -1,5 +1,6 @@
 <?php
   require('../config/connect.php');
+  require('navbar.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,75 +8,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-  	<link rel="stylesheet" href="../make_pretty/style.css">
+  	<link rel="stylesheet" href="../make_pretty/cam_style.css">
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 	<title>Take a Picture!</title>
 </head>
-<body>
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="
-        <?php
-          if($_SESSION['username'])
-          echo 'home.php">';
-          else
-          echo 'index.php">';
-        ?>
-      <h1>Camagru</h1>
-    </a>
+<body class="camera_page">
 
-    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
+<div class ="photobooth">
+  <video id="video" width="500" height="350"></video>
+  
+  <canvas id="canvas" width="500" height="375"> </canvas><button id="capture" class="capture_button">Take Photo!</button>
+  <button id="save">save</button>
+  <input type ="file" id="upload" class="upload"/>
   </div>
-
-  <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-start">
-      <a class="navbar-item" href="
-        <?php
-          if($_SESSION['username'])
-          echo 'home.php">';
-          else
-          echo 'index.php">';
-        ?>
-        Home
-      </a>
-      <a class="navbar-item" href="about.php">
-        About
-      </a>
-      <a class="navbar-item" href="feed.php">
-        Feed
-      </a>
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More
-        </a>
-
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="profile.php">
-            Profile
-          </a>
-          <a class="navbar-item" href="conatct.php">
-            Contact
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item">
-            Report an issue
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="navbar-end">
-    </div>
-  </div>
-</nav>
-<div class = "video">
-  <video id ="video">Stream not available...</video>
-  <canvas class="my_canvas" id ="my_canvas"></canvas>
-</div>
-<button id="capture" >Capture!</button>
-
-<script src = "../js_stuff/vid.js"></script>
+<script src="/camagru/js_stuff/vid.js"></script>

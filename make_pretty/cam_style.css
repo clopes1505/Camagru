@@ -1,0 +1,14 @@
+.photobooth{
+    margin-left: 400px;
+}
+html{
+    background-image: url(https://www.elsetge.cat/myimg/f/45-451169_mt41-starry-night-sky-star-galaxy-space-dark.jpg);
+}
+#capture{
+    position: relative;
+    top: 50px;
+    background-color: violet;
+    border: none;
+    font-size: 15px;
+    right: 550px;
+}
