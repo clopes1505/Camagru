@@ -18,7 +18,7 @@
   <video id="video" width="500" height="350"></video>
   
   <canvas id="canvas" width="500" height="375"> </canvas><button id="capture" class="capture_button">Take Photo!</button>
-  <button id="save">save</button>
+  <a href="#" class="button" id="save">Download</button></a>
   <input type ="file" id="upload" class="upload"/>
   </div>
 <script src="/camagru/js_stuff/vid.js"></script>

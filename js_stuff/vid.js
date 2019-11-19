@@ -4,10 +4,31 @@ var context = canvas.getContext('2d');
 var vendorURL = window.URL || window.webkitURL;
 var uploadpic = document.getElementById('upload');
 navigator.mediaDevices.getUserMedia({video: true}).then((stream) => {video.srcObject = stream; video.play()});
-
+var save = document.getElementById('save');
 document.getElementById('capture').addEventListener('click', function()
 {
     context.drawImage(video, 0, 0, 500, 400);
+    var data = canvas.toDataURL('image/png');
+    // console.log(data);
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onload=function() {
+        console.log(xhttp.responseText);
+    }
+    xhttp.open("POST", "feed.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send('image='+encodeURIComponent(data.replace("data:image/png;base64,", "")));
+
+    // sever (adduser or whereever and satuff dude...php)
+    
+    // 2. listen for data 
+    // if isset($_POST || $_GET thingy) (site sent)
+        // 3. decode (site sent)
+    // else 
+        //error handle thingy
+        // post handle 
+    // 4. save (site sent)
+
     //photo.setAttribute('src', canvas.toDataURL('image/png'));  
 });
 

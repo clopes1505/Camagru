@@ -2,7 +2,7 @@
   <div class="navbar-brand">
     <a class="navbar-item" href="
         <?php
-          if($_SESSION['username'])
+          if(isset($_SESSION['username']))
           echo 'home.php">';
           else
           echo 'index.php">';
@@ -21,7 +21,7 @@
     <div class="navbar-start">
       <a class="navbar-item" href="
         <?php
-          if($_SESSION['username'])
+          if(isset($_SESSION['username']))
           echo 'home.php">';
           else
           echo 'index.php">';
