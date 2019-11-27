@@ -13,56 +13,45 @@
     <title>Image Feed</title>
 </head>
 <body>
-<div class="row">
-  <div class="column">
-    <!-- <img class="image" src="https://www.seekpng.com/png/detail/990-9906722_zorua-cute-pokemon-chibi-pokemon-zorua.png" alt="Zorua" style="width:100%" onclick="myFunction(this);"> -->
-    <img class="image" src="/camagru/images/img.png" alt="Zorua" style="width:100%" onclick="myFunction(this);">
-  </div>
-  <div class="column">
-    <img class="image" src="https://wallpaperplay.com/walls/full/f/5/1/280126.jpg" alt="Sun & Moon" style="width:100%" onclick="myFunction(this);">
-  </div>
-  <div class="column">
-    <img class="image" src="https://www.nicepng.com/png/detail/381-3814032_tumblr-n9ebiijkhl1rii0fxo1-500-cute-anime-chibi-pokemon.png" alt="Mountains" style="width:100%" onclick="myFunction(this);">
-  </div>
-  <div class="column">
-    <img class="image" src="https://res.cloudinary.com/teepublic/image/private/s--n1VHvAFl--/t_Resized%20Artwork/c_fit,g_north_west,h_954,w_954/co_fffffe,e_outline:48/co_fffffe,e_outline:inner_fill:48/co_ffffff,e_outline:48/co_ffffff,e_outline:inner_fill:48/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_jpg,h_630,q_90,w_630/v1517187965/production/designs/2317322_0.jpg" alt="Lights" style="width:100%" onclick="myFunction(this);">
-  </div>
-</div>
-<!-- My ugly stuff -->
-  <?php
-    var_dump($_POST); // cool got post
-    
-    //creates image on server
-    if (isset($_POST['image']))
-    {
-      $img = base64_decode($_POST['image']);
-      file_put_contents( "../images/img.png",$img);
-      // add to db (location of image)
-      // title etc..
-    }
-    
+  <section class = "gallery_links">
+        <div class = "wrapper">
+          <div class = "gallery_container">
+            <?php
+              require("./config/connect.php");
+              $stmt = $connection->prepare("SELECT * FROM `gallery` ORDER BY `postid` DESC");
+              $stmt->execute();
+              while ($img = $stmt->fetch(PDO::FETCH_ASSOC))
+              {
+                $pid = $img['postid'];
+                $statement = $connection->prepare("SELECT * FROM `likes` WHERE `pid` = :pid");
+                $statement->bindParam(":pid", $pid);
+                $statement->execute();
+                $like_count = $statement->rowCount();
+                $statement = $connection->prepare("SELECT COUNT(*) FROM `likes` WHERE `uid`=? AND `pid`=?");
+                $statement->execute(array($_SESSION["uid"], $pid));
+                $isliked = $statement->fetch()[0];
+                ?>
+                <div id="delete_post-<?php echo $pid; ?>">
+                  <a>
+                    <div class = 'gal_img' style = 'background-image: url(./img/uploads/<?php echo $img['imgFullNameGallery'] ?>)'></div>
+                    <h3>Posted by: <?php echo $img['username'] ?></h3>
+                  </a>
+                  <i class = 'fa fa-thumbs-o-<?php echo !$isliked ? "up" : "down";?> like_btn' id = "like-<?php echo $pid; ?>" onclick = "like(<?php echo $pid; ?>)"><a> Like!</a></i>
 
-    // if post (get from DB)
-    // title
-    // img (where?)
-    // likes
-    // 
-  ?>
-
-<!-- shhh  -->
-<div class="container">
-  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg" style="width:100%">
-  <div id="imgtext"></div>
-</div>
-<script>
-function myFunction(imgs) {
-    var expandImg = document.getElementById("expandedImg");
-    var imgText = document.getElementById("imgtext");
-    expandImg.src = imgs.src;
-    imgText.innerHTML = imgs.alt;
-    expandImg.parentElement.style.display = "block";
-  }
-</script>
+                  <a id="like-count-<?php echo $pid; ?>"><?php echo $like_count; ?></a>
+                  <i onclick = "redirect(<?php echo $pid ?>)"><button>Comment</button></i>
+                  <?php
+                  if ($img['username'] === $_SESSION['username'])
+                  {
+                  ?>
+                  <i class = 'fa fa-trash delete_btn' use-id="<?php echo $pid; ?>"><a class = "delete_btn">  Delete your post?</a></i>
+                </div>
+                <?php
+                }
+              }
+            ?>
+          </div>
+        </div>
+      </section>
 </body>
 </html>

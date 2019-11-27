@@ -12,7 +12,7 @@
 			require('../config/connect.php');
 			session_start();
 		 if ($_SERVER["REQUEST_METHOD"] === "POST"){
-			  $sql = "SELECT DISTINCT `password`, `verified` FROM `users` WHERE `username` = :u OR `email` = :e";
+			  $sql = "SELECT DISTINCT `id`, `password`, `verified` FROM `users` WHERE `username` = :u OR `email` = :e";
 			  $req = $connect->prepare($sql);
         $req->bindParam(':e', $_POST['username']);
         $req->bindParam(':u', $_POST['username']);
@@ -21,6 +21,7 @@
 			if (password_verify($_POST['password'],$res['password'] ))
 			{
         $_SESSION['username'] = $_POST['username'];
+        $_SESSION['uid'] = $res['id'];
 				if ($res["verified"] == 1)
 				{
 					header("location: home.php");
