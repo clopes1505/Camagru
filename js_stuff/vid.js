@@ -12,21 +12,6 @@ window.addEventListener("load", () =>
     {
         context.drawImage(video, 0, 0, 500, 400);
         var data = canvas.toDataURL('image/png');
-        
-        //console.log(data);
-
-
-        // sever (adduser or whereever and satuff dude...php)
-        
-        // 2. listen for data 
-        // if isset($_POST || $_GET thingy) (site sent)
-            // 3. decode (site sent)
-        // else 
-            //error handle thingy
-            // post handle 
-        // 4. save (site sent)
-
-        //photo.setAttribute('src', canvas.toDataURL('image/png'));  
         upload.addEventListener('click', () => {
             var xhttp = new XMLHttpRequest();
             xhttp.onload=function() {
@@ -35,23 +20,35 @@ window.addEventListener("load", () =>
             xhttp.open("POST", "upload.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send('image='+encodeURIComponent(data.replace("data:image/png;base64,", "")));
-    
         });
     });
 
 
     uploadpic.addEventListener('change', (event) => {
-        if (uploadpic.files.length > 0)
+        if (uploadpic.files.length > 0 && upload.files[0].type.match(/image\/*/))
         {
-            var img = new Image();
+			var img = new Image();
             img.addEventListener('load', () => {
-                canvas.height = img.height;
+				canvas.height = img.height;
                 canvas.width = img.width;
-                context.drawImage(img, 0, 0);
-            });
-            img.src = URL.createObjectURL(uploadpic.files[0])
-            var request = new XMLHttpRequest();
+                context.drawImage(img, 0, 0 ,500 ,400);
+			});
+			var request = new XMLHttpRequest();
+			request.onload = () =>
+			{
+				if (request.status === 200)
+				{
+					console.log("200");
+					console.log(request.responseText);
+				}
+				else
+					console.log(request.responseText);
+			}
 
+            request.open("POST", "upload.php", true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send('image='+canvas);
         }
+		img.src = URL.createObjectURL(uploadpic.files[0])
     });
 });

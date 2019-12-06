@@ -3,14 +3,16 @@
 	session_start();
  if ($_SERVER["REQUEST_METHOD"] === "POST"){
 	if($_POST[password1] != $_POST[password2])
-	{	
+	{
 		echo "Passwords do not match";
 	// make sure username != email format
 	} else {
 	try{
+		preg_match("/.*htdocs\/(.*)\/make_functional.*/", $_SERVER["SCRIPT_FILENAME"], $matches);
+		$server_location = $matches[1];
 		$verifyhash=md5(rand(0,1000));
 		$hash= password_hash($_POST['password1'], PASSWORD_DEFAULT);
-		$sql="INSERT INTO users (firstname, lastname, username, email, `password`, verified, notifications, verifyhash) 
+		$sql="INSERT INTO users (firstname, lastname, username, email, `password`, verified, notifications, verifyhash)
 		VALUES(:firstname, :lastname, :username, :email, :password, 0, 0, '$verifyhash')";
 		$stmt=$connect->prepare($sql);
 		$stmt->bindParam(':lastname', $_POST['lastname']);
@@ -26,13 +28,13 @@
 		$message = '
 		Thanks for signing up!
 		Your account has been created, you can login with your credentials after you have activated your account by pressing the url below.
- 
+
 		------------------------
 		Username: '.$name.'
 		------------------------
- 
+
 		Please click this link to activate your account:
-		http://localhost:8080/camagru/make_functional/verify.php?email='.$_POST['email'].'&hash='.$verifyhash;
+		http://localhost:8080/'.$server_location.'/make_functional/verify.php?email='.$_POST['email'].'&hash='.$verifyhash;
 
 		$headers = 'From:noreply@camagru.com' . "\r\n"; // Set from headers
 		mail($to, $subject, $message, $headers);
@@ -46,8 +48,8 @@
 	}
 }
 	$connect = NULL;
-	
-} 
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

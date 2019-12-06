@@ -3,10 +3,10 @@
     <a class="navbar-item" href="
         <?php
           if(isset($_SESSION['username']))
-          echo 'home.php">';
+          echo 'home.php';
           else
-          echo 'index.php">';
-        ?>
+          echo 'index.php';
+        ?>">
       <h1>Camagru</h1>
     </a>
 
@@ -22,14 +22,14 @@
       <a class="navbar-item" href="
         <?php
           if(isset($_SESSION['username']))
-          echo 'home.php">';
+          echo 'home.php';
           else
-          echo 'index.php">';
-        ?>
+          echo 'index.php';
+        ?>">
         Home
       </a>
-      <a class="navbar-item" href="about.php">
-        About
+      <a class="navbar-item" href="camera.php">
+        Camera
       </a>
       <a class="navbar-item" href="feed.php">
         Feed
@@ -38,23 +38,54 @@
         <a class="navbar-link">
           More
         </a>
-
         <div class="navbar-dropdown">
           <a class="navbar-item" href="profile.php">
             Profile
-          </a>
-          <a class="navbar-item" href="conatct.php">
-            Contact
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item">
-            Report an issue
           </a>
         </div>
       </div>
     </div>
 
     <div class="navbar-end">
-    </div>
+		<div class="navbar-item">
+        	<div class="buttons">
+			<?php if (isset($_SESSION['username']))
+			{
+			?>
+          		<a class="button is-primary" href="logout.php">
+            	<strong>Log out</strong>
+			  	</a>
+			<?php
+			}
+			?>
+        	</div>
+      	</div>
+	</div>
   </div>
 </nav>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any navbar burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
+
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+});
+</script>

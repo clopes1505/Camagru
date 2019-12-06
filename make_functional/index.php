@@ -30,28 +30,9 @@
       <a class="navbar-item" href="index.php">
         Home
       </a>
-      <a class="navbar-item" href="about.php">
-        About
-      </a>
       <a class="navbar-item" href="feed.php">
         Feed
       </a>
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More
-        </a>
-
-        <div class="navbar-dropdown">
-          <a class="navbar-item">
-            Profile
-          </a>
-          <a class="navbar-item">
-            Contact
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item">
-            Report an issue
-          </a>
         </div>
       </div>
     </div>
@@ -75,7 +56,7 @@
     <img class="bckgrd" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcThdy_XX2J2s9JGPf1nlUpOmn30sYhWBQUAOw5NvQLZksH9RAiw">
   </div>
   <div class="floating">
-    <p>Welcome to Camagru! <br> Check out all our cool features down below</p>
+    <p>Welcome to Camagru! <br> Check out all our cool features by signing up!</p>
   </div>
 </div>
 	<script>

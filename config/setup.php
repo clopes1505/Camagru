@@ -11,7 +11,7 @@
 	}
 	catch(PDOException $e) {
 		echo $e->getMessage();
-		
+
 	}
 	try {
 		$connect = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
@@ -20,7 +20,7 @@
 			id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			firstname VARCHAR(100) NOT NULL,
 			lastname VARCHAR(100) NOT NULL,
-			username VARCHAR(100) NOT NULL UNIQUE, 
+			username VARCHAR(100) NOT NULL UNIQUE,
 			email VARCHAR(100) NOT NULL UNIQUE,
 			`password` VARCHAR(200) NOT NULL,
 			verified BOOLEAN NOT NULL,
@@ -28,8 +28,7 @@
 			verifyhash VARCHAR(100) NOT NULL
 			)";
 		$connect->exec($sql);
-		echo "It really did stuff";
-		// header("Location: ../make_functional/index.php");
+		header("Location: ../make_functional/index.php");
 	}
 	catch(PDOException $e){
 		echo $e->getMessage();
@@ -40,14 +39,46 @@
 		$sql = "CREATE TABLE IF NOT EXISTS posts (
 			`pid` INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			`uid` INT(11) NOT NULL,
-			`imageName` LONGTEXT NOT NULL
+			`imageName` LONGTEXT NOT NULL,
+			`username` VARCHAR(100) NOT NULL
 			)";
 		$connect->exec($sql);
-		echo "It really did post stuff";
-		// header("Location: ../make_functional/index.php");
+		// echo "It really did post stuff";
+		header("Location: ../make_functional/index.php");
 	}
 	catch(PDOException $e){
 		echo $e->getMessage();
-	}/* 
+	}
+	try {
+		$connect = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+		$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "CREATE TABLE IF NOT EXISTS likes (
+			`pid` INT(11) NOT NULL,
+			`username` VARCHAR(100) NOT NULL,
+			UNIQUE KEY (`username`, `pid`)
+			)";
+		$connect->exec($sql);
+		// echo "It really did post stuff";
+		header("Location: ../make_functional/index.php");
+	}
+	catch(PDOException $e){
+		echo $e->getMessage();
+	}
+	try {
+		$connect = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+		$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "CREATE TABLE IF NOT EXISTS comments (
+			`pid` INT(11) NOT NULL,
+			`username` VARCHAR(100) NOT NULL,
+			`comment` VARCHAR(365) NOT NULL
+			)";
+		$connect->exec($sql);
+		// echo "It really did post stuff";
+		header("Location: ../make_functional/index.php");
+	}
+	catch(PDOException $e){
+		echo $e->getMessage();
+	}
+	/*
 	$connect = NULL; */
 ?>

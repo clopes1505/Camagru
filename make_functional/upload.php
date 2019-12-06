@@ -2,7 +2,8 @@
     require("../config/connect.php");
 
     $uid = $_SESSION['uid'];
-    $data = $_POST['image'];
+	var_dump($data = $_POST['image']);
+
     // cool got post
     //creates image on server
     if (isset($_POST['image']))
@@ -14,12 +15,12 @@
         $img = imagecreatefromstring($data);
         imagepng($img, "../images/".$imageName);
     }
-    $stmt = $connect->prepare("INSERT INTO posts(`uid`, `imageName`) VALUES (?, ?)");
-    $stmt->execute(array($uid, $imageName));
+    $stmt = $connect->prepare("INSERT INTO posts(`uid`, `imageName`, `username`) VALUES (?, ?, ?)");
+    $stmt->execute(array($uid, $imageName, $_SESSION['username']));
 
     // if post (get from DB)
     // title
     // img (where?)
     // likes
-    // 
+    //
 ?>
