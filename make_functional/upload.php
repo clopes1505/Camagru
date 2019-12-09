@@ -9,8 +9,6 @@
     if (isset($_POST['image']))
     {
         $imageName = md5($data).".png";
-        $data = str_replace('data:image/png;base64,', '', $data);
-        $data = str_replace(' ', '+', $data);
         $data = base64_decode($data);
         $img = imagecreatefromstring($data);
         imagepng($img, "../images/".$imageName);
