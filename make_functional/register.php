@@ -2,10 +2,9 @@
 	require('../config/connect.php');
 	session_start();
  if ($_SERVER["REQUEST_METHOD"] === "POST"){
-	if($_POST[password1] != $_POST[password2])
+	if($_POST['password1'] != $_POST['password2'])
 	{
 		echo "Passwords do not match";
-	// make sure username != email format
 	} else {
 	try{
 		preg_match("/.*htdocs\/(.*)\/make_functional.*/", $_SERVER["SCRIPT_FILENAME"], $matches);

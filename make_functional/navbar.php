@@ -28,12 +28,15 @@
         ?>">
         Home
       </a>
+      <?php if(isset($_SESSION['username'])){?>
       <a class="navbar-item" href="camera.php">
         Camera
       </a>
+      <?php }?>
       <a class="navbar-item" href="feed.php">
         Feed
       </a>
+      <?php if(isset($_SESSION['username'])){?>
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
           More
@@ -42,6 +45,7 @@
           <a class="navbar-item" href="profile.php">
             Profile
           </a>
+          <?php }?>
         </div>
       </div>
     </div>

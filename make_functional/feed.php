@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 	<script src = "../js_stuff/feed.js"></script>
 	<script src = "../js_stuff/comment.js"></script>
+	<script src = "../js_stuff/delete.js"></script>
 	<title>Image Feed</title>
 </head>
 <body>
@@ -35,30 +36,22 @@
 
 					?>
 						<img class = "img" src = "../images/<?php echo $imgs['imageName'] ?>">
-						<button onclick = "like(<?php echo $pid;?>)">like</button>
+					<?php if(isset($_SESSION['username'])){?><button onclick = "like(<?php echo $pid;?>)">like</button><?php }?>
 						<button href="comment.php" onclick ="redirect(<?php echo $pid?>)">Comment</button>
 						<i id = "num_likes-<?php echo $pid?>"><?php echo $like_count; ?></i>
 						<h3>Posted by: <?php echo $imgs['username'] ?></h3>
 					<?php
+					if (isset($_SESSION['username']) && $imgs['username'] === $_SESSION['username'])
+					{
+						?>
+						<i class = 'fa fa-trash delete_btn' onclick = "delete_post(<?php echo $pid ?>)"><a class = "delete_btn">  Delete your post?</a></i>
+						</div>
+					<?php
 					}
 					?>
-				<!-- // $pid = $img['pid'];
-				// $stmt = $connect->prepare("SELECT * FROM `likes` WHERE `pid` = :pid");
-				// $stmt->bindParam(":pid", $pid);
-				// $stmt->execute();
-				// $stmt = $connect->prepare("SELECT COUNT(*) FROM `likes` WHERE `uid`=? AND `pid`=?");
-				// $stmt->execute(array($_SESSION["uid"], $pid));
-				// $isliked = $stmt->fetch()[0]; -->
-
-				<?php
-				if($imgs['username'] === $_SESSION['username'])
-				{
-				?>
-				<i class = 'fa fa-trash delete_btn' use-id="<?php echo $pid; ?>"><a class = "delete_btn">  Delete your post?</a></i>
-			</div>
-		<?php
-		}
-	?>
+					<?php
+					}
+					?>
 	</div>
 	</div>
 </section>

@@ -3,7 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../make_pretty/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Questrial&amp;display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css">
@@ -34,11 +35,12 @@
 		?>
 </head>
 <body>
-<section class="hero is-primary is-fullheight">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+  <section class="hero is-primary is-fullheight">
+    <p class="warning">MAKE SURE TO VERIFY YOUR ACCOUNT BEFORE LOGGING IN</p>
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-5-tablet is-4-desktop is-3-widescreen">
           <form action="#" method="POST" class="box">
             <div class="field">
               <label for="" class="label">Username/Email</label>
@@ -57,12 +59,6 @@
                   <i class="fa fa-lock"></i>
                 </span>
               </div>
-            </div>
-            <div class="field">
-              <label for="" class="checkbox">
-                <input type="checkbox">
-               Remember me
-              </label>
             </div>
             <div class="field">
               <button class="button is-success">

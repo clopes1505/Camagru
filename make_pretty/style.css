@@ -54,3 +54,11 @@
 {
 	margin-left: 4vw;
 }
+.warning{
+    position: absolute;
+    margin-left: 37vw;
+    margin-top: 10vw;
+}
+.form-popup{
+    display: none;
+}

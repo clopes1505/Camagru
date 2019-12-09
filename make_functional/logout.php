@@ -1,5 +1,5 @@
 <?php
 	require('../config/connect.php');
-	session_unset;
+	session_destroy();
 	header("Location: ../make_functional/index.php");
 ?>
