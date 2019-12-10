@@ -41,10 +41,10 @@
 						<i id = "num_likes-<?php echo $pid?>"><?php echo $like_count; ?></i>
 						<h3>Posted by: <?php echo $imgs['username'] ?></h3>
 					<?php
-					if (isset($_SESSION['username']) && $imgs['username'] === $_SESSION['username'])
+					if (isset($_SESSION['username']) && $imgs['uid'] === $_SESSION['uid'])
 					{
 						?>
-						<i class = 'fa fa-trash delete_btn' onclick = "delete_post(<?php echo $pid ?>)"><a class = "delete_btn">  Delete your post?</a></i>
+						<h4 class = 'fa fa-trash delete_btn' onclick = "delete_post(<?php echo $pid ?>)"><a class = "delete_btn">  Delete your post?</a></h4>
 						</div>
 					<?php
 					}

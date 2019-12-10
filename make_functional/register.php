@@ -2,25 +2,40 @@
 	require('../config/connect.php');
 	session_start();
  if ($_SERVER["REQUEST_METHOD"] === "POST"){
-	if($_POST['password1'] != $_POST['password2'])
-	{
-		echo "Passwords do not match";
-	} else {
+	$firstname = ucwords(strtolower(trim(htmlspecialchars($_POST['firstname']))));
+	$lastname = ucwords(strtolower(trim(htmlspecialchars($_POST['lastname']))));
+	$username = strtolower(trim(htmlspecialchars($_POST['username'])));
+	$email = strtolower(trim(htmlspecialchars($_POST['email'])));
+	$password = htmlspecialchars($_POST['password1']);
+	$password2 = htmlspecialchars($_POST['password2']);
+	if (strlen($password) < 4)
+		die("Too few characters in password");
+	else if (!preg_match("@[A-Z]@", $password))
+		die("No uppercase letter in password");
+	else if (!preg_match("@[a-z]@", $password))
+		die("No Lowercase letter in password");
+	else if (!preg_match("@[0-9]@", $password))
+		die("No number in password");
+	else if (!preg_match("@[^\w]@", $password))
+		die("No special character in password");
+	else if($password != $password2)
+		die("Passwords do not match");
+	else {
 	try{
 		preg_match("/.*htdocs\/(.*)\/make_functional.*/", $_SERVER["SCRIPT_FILENAME"], $matches);
 		$server_location = $matches[1];
 		$verifyhash=md5(rand(0,1000));
-		$hash= password_hash($_POST['password1'], PASSWORD_DEFAULT);
+		$hash= password_hash($password, PASSWORD_DEFAULT);
 		$sql="INSERT INTO users (firstname, lastname, username, email, `password`, verified, notifications, verifyhash)
 		VALUES(:firstname, :lastname, :username, :email, :password, 0, 0, '$verifyhash')";
 		$stmt=$connect->prepare($sql);
-		$stmt->bindParam(':lastname', $_POST['lastname']);
-		$stmt->bindParam(':username', $_POST['username']);
+		$stmt->bindParam(':lastname', $lastname);
+		$stmt->bindParam(':username', $username);
 		$stmt->bindParam(':password', $hash);
-		$stmt->bindParam(':firstname', $_POST['firstname']);
-		$stmt->bindParam(':email', $_POST['email']);
+		$stmt->bindParam(':firstname', $firstname);
+		$stmt->bindParam(':email', $email);
 		$stmt->execute();
-		$to      = $_POST['email'];
+		$to = $email;
 		$_SESSION['email'] = $to;
 		$_SESSION['hash'] = $verifyhash;
 		$subject = 'Signup | Verification';
@@ -29,12 +44,11 @@
 		Your account has been created, you can login with your credentials after you have activated your account by pressing the url below.
 
 		------------------------
-		Username: '.$name.'
+		Username: '.$username.'
 		------------------------
 
 		Please click this link to activate your account:
-		http://localhost:8080/'.$server_location.'/make_functional/verify.php?email='.$_POST['email'].'&hash='.$verifyhash;
-
+		http://localhost:8080/'.$server_location.'/make_functional/verify.php?email='.$email.'&hash='.$verifyhash;
 		$headers = 'From:noreply@camagru.com' . "\r\n"; // Set from headers
 		mail($to, $subject, $message, $headers);
 		header("Location: login.php");

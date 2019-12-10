@@ -54,8 +54,9 @@
 		$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = "CREATE TABLE IF NOT EXISTS likes (
 			`pid` INT(11) NOT NULL,
+			`uid` INT(11) NOT NULL,
 			`username` VARCHAR(100) NOT NULL,
-			UNIQUE KEY (`username`, `pid`)
+			UNIQUE KEY (`uid`, `pid`)
 			)";
 		$connect->exec($sql);
 		// echo "It really did post stuff";
@@ -69,6 +70,7 @@
 		$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = "CREATE TABLE IF NOT EXISTS comments (
 			`pid` INT(11) NOT NULL,
+			`uid` INT(11) NOT NULL,
 			`username` VARCHAR(100) NOT NULL,
 			`comment` VARCHAR(365) NOT NULL
 			)";

@@ -16,7 +16,7 @@ function like(id)
 			likes.innerHTML = Number(likes.innerHTML) - 1;
 		}
 		else
-			console.log(request.responseText);
+			console.log(request.status);
 
 	}
 	request.open("POST", "like.php");
