@@ -66,3 +66,27 @@
 .form_1{
     padding: 0.5vw;
 }
+.not_special{
+	height: 5vw;
+	width: 5vw;
+}
+.sticky{
+	margin: 20% 20%;
+	position: absolute;
+}
+.buttona{
+	margin: 20% 20%;
+	position: absolute;
+}
+.picture{
+	position: relative;
+}
+#display_canvas{
+	position: absolute;
+}
+#sticker_canvas{
+	position: absolute;
+}
+footer{
+	margin-top: 100%;
+}

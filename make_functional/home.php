@@ -20,4 +20,8 @@
   <button id="take_pic" onclick="window.location.href = 'camera.php';">Take A Picture!</button>
 </div>
 </body>
+<footer>
+	<hr>
+	<p>clopes</p>
+</footer>
 </html>

@@ -27,7 +27,7 @@
 		$verifyhash=md5(rand(0,1000));
 		$hash= password_hash($password, PASSWORD_DEFAULT);
 		$sql="INSERT INTO users (firstname, lastname, username, email, `password`, verified, notifications, verifyhash)
-		VALUES(:firstname, :lastname, :username, :email, :password, 0, 0, '$verifyhash')";
+		VALUES(:firstname, :lastname, :username, :email, :password, 0, 1, '$verifyhash')";
 		$stmt=$connect->prepare($sql);
 		$stmt->bindParam(':lastname', $lastname);
 		$stmt->bindParam(':username', $username);
@@ -89,4 +89,8 @@
 		<button type="submit" name="register_btn" value="yes">Register</button>
 	</form>
 </body>
+<footer>
+	<hr>
+	<p>clopes</p>
+</footer>
 </html>

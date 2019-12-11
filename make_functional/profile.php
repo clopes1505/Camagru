@@ -1,34 +1,7 @@
 <?php
 	require('../config/connect.php');
 	require('navbar.php');
-		try {
-			$stmt = $connect->prepare("SELECT * FROM `posts` WHERE `uid` = ? ORDER BY `pid` DESC");
-			$stmt->execute(array($_SESSION['uid']));
-		}
-		catch(PDOException $e) {
-			echo $e->getMessage();
-		}
-		while ($imgs = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			$pid = $imgs['pid'];
-			$statement = $connect->prepare("SELECT * FROM likes WHERE pid = ?");
-			$statement->execute(array($pid));
-			$like_count = $statement->rowCount();
-	
-		?>
-			<img class = "img" src = "../images/<?php echo $imgs['imageName'] ?>">
-			likes <i id = "num_likes-<?php echo $pid?>"><?php echo $like_count; ?></i>
-			<h3>Posted by: <?php echo $imgs['username'] ?></h3>
-		<?php
-		if (isset($_SESSION['username']) && $imgs['uid'] === $_SESSION['uid'])
-		{
-			?>
-			<h4 class = 'fa fa-trash delete_btn' onclick = "delete_post(<?php echo $pid ?>)"><a class = "delete_btn">  Delete your post?</a></h4>
-			</div>
-		<?php
-		}
-		}
-		?>
-		<?php
+
 	if ($_SERVER["REQUEST_METHOD"] === "POST")
 	{
 		$user = $_POST['username'];
@@ -52,7 +25,7 @@
 					echo $e->getMessage();
 				}
 			}
-		} 
+		}
 		if(!empty($user))
 		{
 			try{
@@ -93,9 +66,13 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 	<link rel="stylesheet" href="../make_pretty/style.css">
 	<title>Profile</title>
+	<script src = "../js_stuff/feed.js"></script>
 	<script src = "../js_stuff/profile.js"></script>
+	<script src = "../js_stuff/delete.js"></script>
+
 </head>
 <body>
+<div id="profile_feed"></div>
 <button onclick="popup()" class="button is-primary is-outlined">Update profile settings</button>
 <form action = "#" method = "POST" class = "form-popup" id = "myform">
 	<div class = "form-container">
@@ -138,6 +115,10 @@
 	</div>
   </div>
   </div>
-</form>	
-
+</form>
+<footer>
+	<hr>
+	<p>clopes</p>
+</footer>
+</html>
 </body>

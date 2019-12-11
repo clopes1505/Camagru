@@ -1,14 +1,6 @@
 <?php
-  require('../config/connect.php');
-  require('navbar.php');
-
-	try {
-		$stmt = $connect->prepare("SELECT * FROM `posts` ORDER BY `pid` DESC");
-		$stmt->execute();
-	}
-	catch(PDOException $e) {
-		echo $e->getMessage();
-	}
+	require('../config/connect.php');
+	require('navbar.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,35 +17,11 @@
 </head>
 <body>
 	<section>
-		<div>
-			<div>
-		<?php
-					while ($imgs = $stmt->fetch(PDO::FETCH_ASSOC)) {
-						$pid = $imgs['pid'];
-						$statement = $connect->prepare("SELECT * FROM likes WHERE pid = ?");
-						$statement->execute(array($pid));
-						$like_count = $statement->rowCount();
-
-					?>
-						<img class = "img" src = "../images/<?php echo $imgs['imageName'] ?>">
-					<?php if(isset($_SESSION['username'])){?><button onclick = "like(<?php echo $pid;?>)">like</button><?php }?>
-						<button href="comment.php" onclick ="redirect(<?php echo $pid?>)">Comment</button>
-						<i id = "num_likes-<?php echo $pid?>"><?php echo $like_count; ?></i>
-						<h3>Posted by: <?php echo $imgs['username'] ?></h3>
-					<?php
-					if (isset($_SESSION['username']) && $imgs['uid'] === $_SESSION['uid'])
-					{
-						?>
-						<h4 class = 'fa fa-trash delete_btn' onclick = "delete_post(<?php echo $pid ?>)"><a class = "delete_btn">  Delete your post?</a></h4>
-						</div>
-					<?php
-					}
-					?>
-					<?php
-					}
-					?>
-	</div>
-	</div>
+		<div id="feed"></div>
 </section>
 </body>
+<footer>
+	<hr>
+	<p>clopes</p>
+</footer>
 </html>

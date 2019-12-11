@@ -21,8 +21,8 @@
 			$stmt->execute(array($uid));
 			$res = $stmt->fetch(PDO::FETCH_ASSOC);
 			$subject = 'Someone liked your post';
-			$message = $_SESSION['username'].' has liked your post';
-			$headers = 'From:noreply@camagru.com' . "\r\n"; 
+			$message = $user.' has liked your post';
+			$headers = 'From:noreply@camagru.com' . "\r\n";
 			mail($res['email'], $subject, $message, $headers);
 		}
 		$stmt = $connect->prepare("INSERT INTO likes (pid, `uid`, username) VALUES(?, ?, ?)");

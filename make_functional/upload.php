@@ -2,23 +2,20 @@
     require("../config/connect.php");
 
     $uid = $_SESSION['uid'];
-	var_dump($data = $_POST['image']);
-
-    // cool got post
-    //creates image on server
-    if (isset($_POST['image']))
+	$data = $_POST['image'];
+	var_dump($sticky = $_POST['sticker']);
+    if (isset($data, $sticky))
     {
+		$data = base64_decode($data);
+		$img = imagecreatefromstring($data);
+		$sticky = base64_decode($sticky);
+		$sticker = imagecreatefromstring($sticky);
+
+		imagecopy($img, $sticker, 0, 0, 0, 0, 500, 500);
+
         $imageName = md5($data).".png";
-        $data = base64_decode($data);
-        $img = imagecreatefromstring($data);
         imagepng($img, "../images/".$imageName);
     }
     $stmt = $connect->prepare("INSERT INTO posts(`uid`, `imageName`, `username`) VALUES (?, ?, ?)");
     $stmt->execute(array($uid, $imageName, $_SESSION['username']));
-
-    // if post (get from DB)
-    // title
-    // img (where?)
-    // likes
-    //
 ?>

@@ -30,7 +30,7 @@
           $to = $res['email'];
           $subject = 'Successful Login';
           $message = 'You have successfuly logged into your account on Camagru!';
-          $headers = 'From:noreply@camagru.com' . "\r\n"; 
+          $headers = 'From:noreply@camagru.com' . "\r\n";
           mail($to, $subject, $message, $headers);
 					header("location: home.php");
 				}
@@ -78,4 +78,8 @@
       </div>
     </div>
   </div>
+  <footer>
+	  <hr>
+	  <p>clopes</p>
+  </footer>
 </section>

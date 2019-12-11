@@ -86,4 +86,8 @@
 		});
 	</script>
 </body>
+<footer>
+	<hr>
+	<p>clopes</p>
+</footer>
 </html>
