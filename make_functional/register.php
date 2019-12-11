@@ -20,6 +20,8 @@
 		die("No special character in password");
 	else if($password != $password2)
 		die("Passwords do not match");
+	if(!$firstname || !$lastname || !$username || !$email || !$password || !$password2)
+		die("Please fill in all fields");
 	else {
 	try{
 		preg_match("/.*htdocs\/(.*)\/make_functional.*/", $_SERVER["SCRIPT_FILENAME"], $matches);
@@ -70,10 +72,81 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+	<link rel="stylesheet" href="../make_pretty/style.css">
 	<title>Home</title>
 </head>
-<body>
-	<form action="#" method="POST">
+<section class="hero is-primary is-fullheight">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+          <form action="#" method="POST" class="box">
+            <div class="field">
+              <label for="" class="label">First Name</label>
+              <div class="control has-icons-left">
+                <input type="text" name="firstname" placeholder="e.g. Bob" class="input" required>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </div>
+			</div>
+			<div class="field">
+              <label for="" class="label">Last name</label>
+              <div class="control has-icons-left">
+                <input type="text" name="lastname" placeholder="e.g. Smith" class="input" required>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </div>
+			</div>
+			<div class="field">
+              <label for="" class="label">Email</label>
+              <div class="control has-icons-left">
+                <input type="text" name="email" placeholder="e.g. bobsmith@gmail.com" class="input" required>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </div>
+			</div>
+			<div class="field">
+              <label for="" class="label">Username</label>
+              <div class="control has-icons-left">
+                <input type="text" name="username" placeholder="e.g. bobsmith22" class="input" required>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="" class="label">Password</label>
+              <div class="control has-icons-left">
+                <input type="password" name="password1" placeholder="*******" class="input" required>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-lock"></i>
+                </span>
+              </div>
+			</div>
+			<div class="field">
+              <label for="" class="label">Confrim Password</label>
+              <div class="control has-icons-left">
+                <input type="password" name="password2" placeholder="*******" class="input" required>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-lock"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+			<button class="button is-success" type="submit" name="register_btn" value="yes">Register</button>
+            </div>
+            <a href="login.php">Already have an account?</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+	<!-- <form action="#" method="POST">
 		<input type="text" name="firstname" placeholder="First Name" required>
 		<br>
 		<input type="text" name="lastname" placeholder="Last Name" required>
@@ -87,10 +160,7 @@
 		<input type="password" name="password2" placeholder="Confirm Password" required>
 		<br>
 		<button type="submit" name="register_btn" value="yes">Register</button>
-	</form>
+	</form> -->
 </body>
-<footer>
-	<hr>
-	<p>clopes</p>
-</footer>
 </html>
+<?php include('footer.php');?>

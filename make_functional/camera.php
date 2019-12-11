@@ -21,7 +21,7 @@
 		<img id="display_canvas">
 		<img id="sticker_canvas">
 	</div>
-	<div class ="sticky">
+	<div class ="sticky" id="sticky">
 		<img id="chartato" class="not_special" src="../stickers/chartato.png" alt="Char + Potato(you really missing out :( )" style="cursor: pointer;">
 		<img id="raichu" class="not_special" src="../stickers/raichu.png" alt="Riahnna" style="cursor: pointer;">
 		<img id="umbreon" class="not_special" src="../stickers/umbreon.png" alt="Umbrella, ella, ehh, ehh , eh" style="cursor: pointer;">
@@ -29,13 +29,10 @@
 	</div>
 	<div class="buttona">
 		<button id="capture" class="capture_button">Take Photo!</button>
-		<button><a href="#" class="button" id="upload">Upload</a></button>
-		<input type ="file" id="file" class="upload"/>
+		<input type ="file" id="file" class="file"/>
 	</div>
+	<button id="upload"><a href="#">Upload</a></button>
 </div>
 <script src="../js_stuff/vid.js"></script>
 </body>
-				<footer>
-					<hr>
-					<p>clopes</p>
-				</footer>
+<?php include('footer.php');?>

@@ -3,7 +3,7 @@
 
     $uid = $_SESSION['uid'];
 	$data = $_POST['image'];
-	var_dump($sticky = $_POST['sticker']);
+	$sticky = $_POST['sticker'];
     if (isset($data, $sticky))
     {
 		$data = base64_decode($data);
@@ -17,5 +17,5 @@
         imagepng($img, "../images/".$imageName);
     }
     $stmt = $connect->prepare("INSERT INTO posts(`uid`, `imageName`, `username`) VALUES (?, ?, ?)");
-    $stmt->execute(array($uid, $imageName, $_SESSION['username']));
+	$stmt->execute(array($uid, $imageName, $_SESSION['username']));
 ?>

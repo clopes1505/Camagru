@@ -71,11 +71,12 @@
 	width: 5vw;
 }
 .sticky{
-	margin: 20% 20%;
-	position: absolute;
+	margin: 23vw 5vw;
+	position: fixed;
+	display: none;
 }
 .buttona{
-	margin: 20% 20%;
+	margin: 3vw 8vw;
 	position: absolute;
 }
 .picture{
@@ -87,6 +88,13 @@
 #sticker_canvas{
 	position: absolute;
 }
-footer{
-	margin-top: 100%;
+.foot, #footer {
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+}
+#upload{
+	margin: 28vw 5vw;
+	display: none;
+	position: fixed;
 }

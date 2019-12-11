@@ -1,23 +1,34 @@
 <?php
 	require('../config/connect.php');
-	require('navbar.php');
 
 	if ($_SERVER["REQUEST_METHOD"] === "POST")
 	{
-		$user = $_POST['username'];
-		$email = $_POST['email'];
-		$passw1 = $_POST['password1'];
-		$passw2 = $_POST['password2'];
-		if ($passw1 && $passw2)
+		$user = strtolower(trim(htmlspecialchars($_POST['username'])));
+		$email = strtolower(trim(htmlspecialchars($_POST['email'])));
+		$password = htmlspecialchars($_POST['password1']);
+		$password2 = htmlspecialchars($_POST['password2']);
+		if ($password && $password2)
 		{
-			if($passw1 != $passw2)
+			if($password != $password2)
 			{
 				die ("Passwords do not match");
 			}
+			if (strlen($password) < 4)
+				die("Too few characters in password");
+			else if (!preg_match("@[A-Z]@", $password))
+				die("No uppercase letter in password");
+			else if (!preg_match("@[a-z]@", $password))
+				die("No Lowercase letter in password");
+			else if (!preg_match("@[0-9]@", $password))
+				die("No number in password");
+			else if (!preg_match("@[^\w]@", $password))
+				die("No special character in password");
+			else if($password != $password2)
+				die("Passwords do not match");
 			else
 			{
 				try {
-					$hash= password_hash($passw1, PASSWORD_DEFAULT);
+					$hash= password_hash($password, PASSWORD_DEFAULT);
 					$sql = $connect->prepare("UPDATE users SET `password` = ? WHERE username = ?");
 					$sql->execute(array($hash, $_SESSION['username']));
 				}
@@ -29,7 +40,7 @@
 		if(!empty($user))
 		{
 			try{
-				$sql = $connect->prepare("UPDATE users SET username = ? WHERE username = ? AND `uid` = ?");
+				$sql = $connect->prepare("UPDATE users SET username = ? WHERE username = ? AND `id` = ?");
 				$sql->execute(array($user, $_SESSION['username'], $_SESSION['uid']));
 				$sql = $connect->prepare("UPDATE posts SET username = ? WHERE username = ? AND `uid` = ?");
 				$sql->execute(array($user, $_SESSION['username'], $_SESSION['uid']));
@@ -57,6 +68,7 @@
 		$connect = NULL;
 	}
 ?>
+<?php require("navbar.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,6 +84,7 @@
 
 </head>
 <body>
+<?php include('footer.php');?>
 <div id="profile_feed"></div>
 <button onclick="popup()" class="button is-primary is-outlined">Update profile settings</button>
 <form action = "#" method = "POST" class = "form-popup" id = "myform">
@@ -116,9 +129,4 @@
   </div>
   </div>
 </form>
-<footer>
-	<hr>
-	<p>clopes</p>
-</footer>
-</html>
 </body>

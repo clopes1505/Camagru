@@ -18,7 +18,7 @@ require('../config/connect.php');
 			?>
 			<img class = "img" src = "../images/<?php echo $imgs['imageName'] ?>">
 			<?php if(isset($_SESSION['username'])){?><button onclick = "like(<?php echo $pid;?>)">like</button><?php }?>
-			<button href="comment.php" onclick ="redirect(<?php echo $pid?>)">Comment</button>
+			<?php if(isset($_SESSION['username'])){?><button href="comment.php" onclick ="redirect(<?php echo $pid?>)">Comment</button><?php }?>
 			<i id = "num_likes-<?php echo $pid?>"><?php echo $like_count; ?></i>
 			<h3>Posted by: <?php echo $imgs['username'] ?></h3>
 			<?php

@@ -7,16 +7,15 @@ window.addEventListener("load", () =>
 	var sticker_display = document.getElementById('sticker_canvas');
 	var context = canvas.getContext('2d');
 	var sticky_context = sticky_canvas.getContext('2d');
-    var vendorURL = window.URL || window.webkitURL;
     var uploadpic = document.getElementById('file');
     var upload = document.getElementById('upload');
     navigator.mediaDevices.getUserMedia({video: true}).then((stream) => {video.srcObject = stream; video.play()});
 	var capture = document.getElementById('capture');
-	var save = document.getElementById('save');
 	var umbreon = document.getElementById('umbreon');
 	var chartato = document.getElementById('chartato');
 	var goodboy = document.getElementById('goodboy');
 	var raichu = document.getElementById('raichu');
+	var sticky= document.getElementById('sticky');
 
 	uploadpic.addEventListener('change', () => {
 		if (uploadpic.files.length > 0)
@@ -27,7 +26,15 @@ window.addEventListener("load", () =>
 			img.addEventListener('load', () => {
 				canvas.height = img.height;
 				canvas.width = img.width;
+				sticky_canvas.height = canvas.height;
+				sticky_canvas.width = canvas.width;
 				context.drawImage(img, 0, 0 ,500 ,400);
+				display.src = canvas.toDataURL();
+				video.style.display = "none";
+				capture.style.display = "none";
+				uploadpic.style.display = "none";
+				upload.style.display = "block";
+				sticky.style.display = "block";
 			});
 		}
 		img.src = URL.createObjectURL(uploadpic.files[0])
@@ -43,6 +50,8 @@ window.addEventListener("load", () =>
 		video.style.display = "none";
 		capture.style.display = "none";
 		uploadpic.style.display = "none";
+		upload.style.display = "block";
+		sticky.style.display = "block";
 	});
 	umbreon.addEventListener("click", () => {
 		sticky_context.drawImage(umbreon, 0, 0, 100, 100);
@@ -62,6 +71,8 @@ window.addEventListener("load", () =>
 	})
 	var xhttp = new XMLHttpRequest();
 	xhttp.onload=function() {
+		if (xhttp.status === 200)
+			location.replace("feed.php");
 		console.log(xhttp.responseText);
 	}
 	upload.addEventListener('click', () => {

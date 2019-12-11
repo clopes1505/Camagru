@@ -1,6 +1,6 @@
 delete_post = (pid) =>
 {
-	var confirmation = confirm("Are you sure youy wanna delete your post?");
+	var confirmation = confirm("Are you sure you want to delete your post?");
 	if(confirmation)
 	{
 		var request = new XMLHttpRequest();

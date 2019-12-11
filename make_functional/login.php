@@ -78,8 +78,5 @@
       </div>
     </div>
   </div>
-  <footer>
-	  <hr>
-	  <p>clopes</p>
-  </footer>
 </section>
+<?php include('footer.php');?>

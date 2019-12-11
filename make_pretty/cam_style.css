@@ -1,5 +1,5 @@
 .photobooth{
-    margin-left: 400px;
+    margin-left: 35vw;
 }
 html{
     background-image: url(https://www.elsetge.cat/myimg/f/45-451169_mt41-starry-night-sky-star-galaxy-space-dark.jpg);
@@ -9,5 +9,4 @@ html{
     background-color: violet;
     border: none;
     font-size: 1vw;
-    /* right: 550px; */
 }
